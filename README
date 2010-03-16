@@ -1,6 +1,6 @@
 This package assumes the following configuration:
 
-1. Packageis "rrdtool" and "sysstat" are installed.
+1. Packages "rrdtool" and "sysstat" are installed.
 2. User "stats" exists with the following paths:
       /home/stats/bin/rrdstatsr	- contains all executables.
 	  /home/stats/data			- contains all round-robin databases.
