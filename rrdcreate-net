@@ -1,0 +1,12 @@
+#!/bin/bash
+    eth0=1
+    eth1=1
+    eth3=1
+    if (( ! $[$1]==1 )); then echo 'Device specification omitted or invalid.'; exit; fi
+
+    rrdtool create /home/stats/data/`hostname -s`-net-$1.rrd --step 60 \
+		DS:MBRead:DERIVE:240:0:U \
+		DS:MBWritten:DERIVE:240:0:U \
+		RRA:AVERAGE:0.5:1:10000 \
+		RRA:AVERAGE:0.5:5:4000 \
+		RRA:AVERAGE:0.5:60:9000 

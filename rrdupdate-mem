@@ -1,0 +1,5 @@
+#!/bin/bash
+	meminfo=`/bin/awk  '{print $2}' /proc/meminfo | /bin/awk 'BEGIN { RS=";"; FS="\n" }{print ($1-$2)/1048576 ":" $3/1048576 ":" $4/1048576 ":" $1/1048576}'`
+	host=`/bin/hostname -s`
+	echo "rrdtool update /home/stats/data/$host-mem.rrd N:$meminfo"
+	/usr/bin/rrdtool update /home/stats/data/$host-mem.rrd N:$meminfo

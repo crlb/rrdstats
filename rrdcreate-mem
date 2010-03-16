@@ -1,0 +1,9 @@
+#!/bin/bash
+    rrdtool create /home/stats/data/`hostname -s`-mem.rrd --step 60 \
+		DS:used:GAUGE:240:0:U \
+		DS:buffers:GAUGE:240:0:U \
+		DS:cache:GAUGE:240:0:U \
+		DS:total:GAUGE:240:0:U \
+		RRA:AVERAGE:0.5:1:10000 \
+		RRA:AVERAGE:0.5:5:4000 \
+		RRA:AVERAGE:0.5:60:9000 

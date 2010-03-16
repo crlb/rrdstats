@@ -1,0 +1,10 @@
+#!/bin/bash
+    rrdtool create /home/stats/data/`hostname -s`-cpu.rrd --step 60 \
+		DS:usr:GAUGE:240:0:100 \
+		DS:sys:GAUGE:240:0:100 \
+		DS:iow:GAUGE:240:0:100 \
+		DS:irq:GAUGE:240:0:100 \
+		DS:total:GAUGE:240:0:100 \
+		RRA:AVERAGE:0.5:1:10000 \
+		RRA:AVERAGE:0.5:5:4000 \
+		RRA:AVERAGE:0.5:60:9000 

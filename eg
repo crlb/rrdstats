@@ -1,0 +1,21 @@
+#!/bin/bash
+	if [[ ! $1 = 'cpu' && ! $1 = 'disk' && ! $1 = 'loadavg' && ! $1 = 'mem' && ! $1 = 'net' ]]; then echo "synopsis: eg resource host <start> <end>"; echo "   Where:"; echo "      resources: cpu, disk, loadavg, mem or net"; echo "      hosts: e, e1, e2, e3, etc."; exit
+	fi
+
+	if [[ $2 = 'e' ]]; then host='elephant'
+	elif [[ $2 = 'e1'  ]]; then host='elephant01'
+	elif [[ $2 = 'e2'  ]]; then host='elephant02'
+	elif [[ $2 = 'e3'  ]]; then host='elephant03'
+	elif [[ $2 = 'e4'  ]]; then host='elephant04'
+	elif [[ $2 = 'e5'  ]]; then host='elephant05'
+	elif [[ $2 = 'e6'  ]]; then host='elephant06'
+	elif [[ $2 = 'e7'  ]]; then host='elephant07'
+	elif [[ $2 = 'e8'  ]]; then host='elephant08'
+	elif [[ $2 = 'e9'  ]]; then host='elephant09'
+	elif [[ $2 = 'e10' ]]; then host='elephant10'
+	elif [[ $2 = 'e11' ]]; then host='elephant11'
+	else echo "Host omitted or invalid."; exit
+	fi
+
+	~stats/bin/rrdstats/rrdgraph-$1 $2 $3 $4 $5 || exit
+	/usr/bin/gthumb --fullscreen ~/stats/$host-$1.png &

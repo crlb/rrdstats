@@ -1,0 +1,66 @@
+#!/bin/bash
+	if [[ $1 = 'e' ]]; then host='elephant'
+	elif [[ $1 =  "e1" ]]; then host='elephant01'
+	elif [[ $1 = "e2" ]]; then host='elephant02'
+	elif [[ $1 = "e3" ]]; then host='elephant03'
+	elif [[ $1 = "e4" ]]; then host='elephant04'
+	elif [[ $1 = "e5" ]]; then host='elephant05'
+	elif [[ $1 = "e6" ]]; then host='elephant06'
+	elif [[ $1 = "e7" ]]; then host='elephant07'
+	elif [[ $1 = "e8" ]]; then host='elephant08'
+	elif [[ $1 = "e9" ]]; then host='elephant09'
+	elif [[ $1 = "e10" ]]; then host='elephant10'
+	elif [[ $1 = "e11" ]]; then host='elephant11'
+	else echo "Host omitted or invalid."; exit
+	fi
+
+    /bin/mkdir -p ~/stats
+
+	if [[ $2 = '' ]]; then start='-86400s'
+		else start=$2
+		fi
+
+	if [[ $3 = '' ]]; then end='N'
+		else end=$3
+		fi
+
+	if [[ $1 == 'e' ]]; then
+		rrdtool graph  ~/stats/$host-loadavg.png --imgformat PNG \
+			--title 'Load Average ('$host')' \
+			--width 1600 --height 800 \
+			--start $start --end $end \
+			DEF:e1t=/home/stats/data/elephant01-loadavg.rrd:a1:AVERAGE \
+			DEF:e2t=/home/stats/data/elephant02-loadavg.rrd:a1:AVERAGE \
+			DEF:e3t=/home/stats/data/elephant03-loadavg.rrd:a1:AVERAGE \
+			DEF:e4t=/home/stats/data/elephant04-loadavg.rrd:a1:AVERAGE \
+			DEF:e5t=/home/stats/data/elephant05-loadavg.rrd:a1:AVERAGE \
+			DEF:e6t=/home/stats/data/elephant06-loadavg.rrd:a1:AVERAGE \
+			DEF:e7t=/home/stats/data/elephant07-loadavg.rrd:a1:AVERAGE \
+			DEF:e8t=/home/stats/data/elephant08-loadavg.rrd:a1:AVERAGE \
+			DEF:e9t=/home/stats/data/elephant09-loadavg.rrd:a1:AVERAGE \
+			DEF:e10t=/home/stats/data/elephant10-loadavg.rrd:a1:AVERAGE \
+			DEF:e11t=/home/stats/data/elephant11-loadavg.rrd:a1:AVERAGE \
+			LINE:e1t#00007f:"e1" \
+			LINE:e2t#0000ff:"e2" \
+			LINE:e3t#007f00:"e3" \
+			LINE:e4t#007f7f:"e4" \
+			LINE:e5t#007fff:"e5" \
+			LINE:e6t#00ff00:"e6" \
+			LINE:e7t#00ff7f:"e7" \
+			LINE:e8t#00ffff:"e8" \
+			LINE:e9t#7f0000:"e9" \
+			LINE:e10t#7f007f:"e10" \
+			LINE:e11t#7f00ff:"e11"
+	else
+		rrdtool graph  ~/stats/$host-loadavg.png --imgformat PNG \
+			--title 'Load Average ('$host')' \
+			--width 1600 --height 800 \
+			--start $start --end $end \
+			DEF:a1=/home/stats/data/$host-loadavg.rrd:a1:AVERAGE \
+			DEF:a5=/home/stats/data/$host-loadavg.rrd:a5:AVERAGE \
+			DEF:a15=/home/stats/data/$host-loadavg.rrd:a15:AVERAGE \
+			LINE:a1#007f:"one-minute-average" \
+			LINE:a5#0000ff:"five-minute-average" \
+			LINE:a15#007f00:"fifteen-minute-average"
+	fi
+

@@ -1,0 +1,138 @@
+#!/bin/bash
+	if [[ $1 = 'e' ]]; then host='elephant'
+	elif [[ $1 =  "e1" ]]; then host='elephant01'
+	elif [[ $1 = "e2" ]]; then host='elephant02'
+	elif [[ $1 = "e3" ]]; then host='elephant03'
+	elif [[ $1 = "e4" ]]; then host='elephant04'
+	elif [[ $1 = "e5" ]]; then host='elephant05'
+	elif [[ $1 = "e6" ]]; then host='elephant06'
+	elif [[ $1 = "e7" ]]; then host='elephant07'
+	elif [[ $1 = "e8" ]]; then host='elephant08'
+	elif [[ $1 = "e9" ]]; then host='elephant09'
+	elif [[ $1 = "e10" ]]; then host='elephant10'
+	elif [[ $1 = "e11" ]]; then host='elephant11'
+	else echo "Host omitted or invalid."; exit
+	fi
+
+    /bin/mkdir -p ~/stats
+
+	if [[ $2 = '' ]]; then start='-86400s'
+		else start=$2
+		fi
+
+	if [[ $3 = '' ]]; then end='N'
+		else end=$3
+		fi
+
+	if [[ $1 == 'e' ]]; then
+		rrdtool graph  ~/stats/$host-net.png --imgformat PNG \
+			--title 'Network Bandwidth Utilization ('$host')' \
+			--width 1600 --height 800 \
+			--start $start --end $end \
+			DEF:e1r0=/home/stats/data/elephant01-net-eth0.rrd:MBRead:AVERAGE \
+			DEF:e1w0=/home/stats/data/elephant01-net-eth0.rrd:MBWritten:AVERAGE \
+			DEF:e1r1=/home/stats/data/elephant01-net-eth1.rrd:MBRead:AVERAGE \
+			DEF:e1w1=/home/stats/data/elephant01-net-eth1.rrd:MBWritten:AVERAGE \
+			DEF:e1r3=/home/stats/data/elephant01-net-eth3.rrd:MBRead:AVERAGE \
+			DEF:e1w3=/home/stats/data/elephant01-net-eth3.rrd:MBWritten:AVERAGE \
+			CDEF:e1t=e1r0,e1w0,+,e1r1,+,e1w1,+,e1r3,+,e1w3,+ \
+			DEF:e2r0=/home/stats/data/elephant02-net-eth0.rrd:MBRead:AVERAGE \
+			DEF:e2w0=/home/stats/data/elephant02-net-eth0.rrd:MBWritten:AVERAGE \
+			DEF:e2r1=/home/stats/data/elephant02-net-eth1.rrd:MBRead:AVERAGE \
+			DEF:e2w1=/home/stats/data/elephant02-net-eth1.rrd:MBWritten:AVERAGE \
+			DEF:e2r3=/home/stats/data/elephant02-net-eth3.rrd:MBRead:AVERAGE \
+			DEF:e2w3=/home/stats/data/elephant02-net-eth3.rrd:MBWritten:AVERAGE \
+			CDEF:e2t=e2r0,e2w0,+,e2r1,+,e2w1,+,e2r3,+,e2w3,+ \
+			DEF:e3r0=/home/stats/data/elephant03-net-eth0.rrd:MBRead:AVERAGE \
+			DEF:e3w0=/home/stats/data/elephant03-net-eth0.rrd:MBWritten:AVERAGE \
+			DEF:e3r1=/home/stats/data/elephant03-net-eth1.rrd:MBRead:AVERAGE \
+			DEF:e3w1=/home/stats/data/elephant03-net-eth1.rrd:MBWritten:AVERAGE \
+			DEF:e3r3=/home/stats/data/elephant03-net-eth3.rrd:MBRead:AVERAGE \
+			DEF:e3w3=/home/stats/data/elephant03-net-eth3.rrd:MBWritten:AVERAGE \
+			CDEF:e3t=e3r0,e3w0,+,e3r1,+,e3w1,+,e3r3,+,e3w3,+ \
+			DEF:e4r0=/home/stats/data/elephant04-net-eth0.rrd:MBRead:AVERAGE \
+			DEF:e4w0=/home/stats/data/elephant04-net-eth0.rrd:MBWritten:AVERAGE \
+			DEF:e4r1=/home/stats/data/elephant04-net-eth1.rrd:MBRead:AVERAGE \
+			DEF:e4w1=/home/stats/data/elephant04-net-eth1.rrd:MBWritten:AVERAGE \
+			DEF:e4r3=/home/stats/data/elephant04-net-eth3.rrd:MBRead:AVERAGE \
+			DEF:e4w3=/home/stats/data/elephant04-net-eth3.rrd:MBWritten:AVERAGE \
+			CDEF:e4t=e4r0,e4w0,+,e4r1,+,e4w1,+,e4r3,+,e4w3,+ \
+			DEF:e5r0=/home/stats/data/elephant05-net-eth0.rrd:MBRead:AVERAGE \
+			DEF:e5w0=/home/stats/data/elephant05-net-eth0.rrd:MBWritten:AVERAGE \
+			DEF:e5r1=/home/stats/data/elephant05-net-eth1.rrd:MBRead:AVERAGE \
+			DEF:e5w1=/home/stats/data/elephant05-net-eth1.rrd:MBWritten:AVERAGE \
+			DEF:e5r3=/home/stats/data/elephant05-net-eth3.rrd:MBRead:AVERAGE \
+			DEF:e5w3=/home/stats/data/elephant05-net-eth3.rrd:MBWritten:AVERAGE \
+			CDEF:e5t=e5r0,e5w0,+,e5r1,+,e5w1,+,e5r3,+,e5w3,+ \
+			DEF:e6r0=/home/stats/data/elephant06-net-eth0.rrd:MBRead:AVERAGE \
+			DEF:e6w0=/home/stats/data/elephant06-net-eth0.rrd:MBWritten:AVERAGE \
+			DEF:e6r1=/home/stats/data/elephant06-net-eth1.rrd:MBRead:AVERAGE \
+			DEF:e6w1=/home/stats/data/elephant06-net-eth1.rrd:MBWritten:AVERAGE \
+			DEF:e6r3=/home/stats/data/elephant06-net-eth3.rrd:MBRead:AVERAGE \
+			DEF:e6w3=/home/stats/data/elephant06-net-eth3.rrd:MBWritten:AVERAGE \
+			CDEF:e6t=e6r0,e6w0,+,e6r1,+,e6w1,+,e6r3,+,e6w3,+ \
+			DEF:e7r0=/home/stats/data/elephant07-net-eth0.rrd:MBRead:AVERAGE \
+			DEF:e7w0=/home/stats/data/elephant07-net-eth0.rrd:MBWritten:AVERAGE \
+			DEF:e7r1=/home/stats/data/elephant07-net-eth1.rrd:MBRead:AVERAGE \
+			DEF:e7w1=/home/stats/data/elephant07-net-eth1.rrd:MBWritten:AVERAGE \
+			DEF:e7r3=/home/stats/data/elephant07-net-eth3.rrd:MBRead:AVERAGE \
+			DEF:e7w3=/home/stats/data/elephant07-net-eth3.rrd:MBWritten:AVERAGE \
+			CDEF:e7t=e7r0,e7w0,+,e7r1,+,e7w1,+,e7r3,+,e7w3,+ \
+			DEF:e8r0=/home/stats/data/elephant08-net-eth0.rrd:MBRead:AVERAGE \
+			DEF:e8w0=/home/stats/data/elephant08-net-eth0.rrd:MBWritten:AVERAGE \
+			DEF:e8r1=/home/stats/data/elephant08-net-eth1.rrd:MBRead:AVERAGE \
+			DEF:e8w1=/home/stats/data/elephant08-net-eth1.rrd:MBWritten:AVERAGE \
+			DEF:e8r3=/home/stats/data/elephant08-net-eth3.rrd:MBRead:AVERAGE \
+			DEF:e8w3=/home/stats/data/elephant08-net-eth3.rrd:MBWritten:AVERAGE \
+			CDEF:e8t=e8r0,e8w0,+,e8r1,+,e8w1,+,e8r3,+,e8w3,+ \
+			DEF:e9r0=/home/stats/data/elephant09-net-eth0.rrd:MBRead:AVERAGE \
+			DEF:e9w0=/home/stats/data/elephant09-net-eth0.rrd:MBWritten:AVERAGE \
+			DEF:e9r1=/home/stats/data/elephant09-net-eth1.rrd:MBRead:AVERAGE \
+			DEF:e9w1=/home/stats/data/elephant09-net-eth1.rrd:MBWritten:AVERAGE \
+			DEF:e9r3=/home/stats/data/elephant09-net-eth3.rrd:MBRead:AVERAGE \
+			DEF:e9w3=/home/stats/data/elephant09-net-eth3.rrd:MBWritten:AVERAGE \
+			CDEF:e9t=e9r0,e9w0,+,e9r1,+,e9w1,+,e9r3,+,e9w3,+ \
+			DEF:e10r0=/home/stats/data/elephant10-net-eth0.rrd:MBRead:AVERAGE \
+			DEF:e10w0=/home/stats/data/elephant10-net-eth0.rrd:MBWritten:AVERAGE \
+			DEF:e10r1=/home/stats/data/elephant10-net-eth1.rrd:MBRead:AVERAGE \
+			DEF:e10w1=/home/stats/data/elephant10-net-eth1.rrd:MBWritten:AVERAGE \
+			DEF:e10r3=/home/stats/data/elephant10-net-eth3.rrd:MBRead:AVERAGE \
+			DEF:e10w3=/home/stats/data/elephant10-net-eth3.rrd:MBWritten:AVERAGE \
+			CDEF:e10t=e10r0,e10w0,+,e10r1,+,e10w1,+,e10r3,+,e10w3,+ \
+			DEF:e11r0=/home/stats/data/elephant11-net-eth0.rrd:MBRead:AVERAGE \
+			DEF:e11w0=/home/stats/data/elephant11-net-eth0.rrd:MBWritten:AVERAGE \
+			DEF:e11r1=/home/stats/data/elephant11-net-eth1.rrd:MBRead:AVERAGE \
+			DEF:e11w1=/home/stats/data/elephant11-net-eth1.rrd:MBWritten:AVERAGE \
+			DEF:e11r3=/home/stats/data/elephant11-net-eth3.rrd:MBRead:AVERAGE \
+			DEF:e11w3=/home/stats/data/elephant11-net-eth3.rrd:MBWritten:AVERAGE \
+			CDEF:e11t=e11r0,e11w0,+,e11r1,+,e11w1,+,e11r3,+,e11w3,+ \
+			LINE:e1t#00007f:"e1" \
+			LINE:e2t#0000ff:"e2" \
+			LINE:e3t#007f00:"e3" \
+			LINE:e4t#007f7f:"e4" \
+			LINE:e5t#007fff:"e5" \
+			LINE:e6t#00ff00:"e6" \
+			LINE:e7t#00ff7f:"e7" \
+			LINE:e8t#00ffff:"e8" \
+			LINE:e9t#7f0000:"e9" \
+			LINE:e10t#7f007f:"e10" \
+			LINE:e11t#7f00ff:"e11"
+	else
+		rrdtool graph  ~/stats/$host-net.png --imgformat PNG \
+			--title 'Network Bandwidth Utilization ('$host')' \
+			--width 1600 --height 800 \
+			--start $start --end $end \
+			DEF:r0=/home/stats/data/$host-net-eth0.rrd:MBRead:AVERAGE \
+			DEF:w0=/home/stats/data/$host-net-eth0.rrd:MBWritten:AVERAGE \
+			DEF:r1=/home/stats/data/$host-net-eth1.rrd:MBRead:AVERAGE \
+			DEF:w1=/home/stats/data/$host-net-eth1.rrd:MBWritten:AVERAGE \
+			DEF:r3=/home/stats/data/$host-net-eth3.rrd:MBRead:AVERAGE \
+			DEF:w3=/home/stats/data/$host-net-eth3.rrd:MBWritten:AVERAGE \
+			LINE:r0#00007f:"eth0-read" \
+			LINE:w0#0000ff:"eth0-write" \
+			LINE:r1#007f00:"eth1-read" \
+			LINE:w1#007f7f:"eth1-write" \
+			LINE:r3#007fff:"eth3-read" \
+			LINE:w3#00ffff:"eth3-write"
+	fi
+

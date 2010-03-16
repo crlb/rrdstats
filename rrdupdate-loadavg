@@ -1,0 +1,5 @@
+#!/bin/bash
+	averages=`/bin/awk '{print \$1 ":" \$2 ":" \$3}' /proc/loadavg`
+	host=`/bin/hostname -s`
+	echo "rrdtool update /home/stats/data/$host-loadavg.rrd N:$averages"
+	/usr/bin/rrdtool update /home/stats/data/$host-loadavg.rrd N:$averages

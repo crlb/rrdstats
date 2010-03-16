@@ -1,0 +1,107 @@
+#!/bin/bash
+	if [[ $1 = 'e' ]]; then host='elephant'
+	elif [[ $1 =  "e1" ]]; then host='elephant01'
+	elif [[ $1 = "e2" ]]; then host='elephant02'
+	elif [[ $1 = "e3" ]]; then host='elephant03'
+	elif [[ $1 = "e4" ]]; then host='elephant04'
+	elif [[ $1 = "e5" ]]; then host='elephant05'
+	elif [[ $1 = "e6" ]]; then host='elephant06'
+	elif [[ $1 = "e7" ]]; then host='elephant07'
+	elif [[ $1 = "e8" ]]; then host='elephant08'
+	elif [[ $1 = "e9" ]]; then host='elephant09'
+	elif [[ $1 = "e10" ]]; then host='elephant10'
+	elif [[ $1 = "e11" ]]; then host='elephant11'
+	else echo "Host omitted or invalid."; exit
+	fi
+
+    /bin/mkdir -p ~/stats
+
+	if [[ $2 = '' ]]; then start='-86400s'
+		else start=$2
+		fi
+
+	if [[ $3 = '' ]]; then end='N'
+		else end=$3
+		fi
+
+	if [[ $1 == 'e' ]]; then
+		rrdtool graph  ~/stats/$host-mem.png --imgformat PNG \
+			--title 'Memory Usage ('$host')' \
+			--vertical-label 'Gigabytes' \
+			--width 1600 --height 800 \
+			--start $start --end $end \
+			--lower-limit 0 --upper-limit 24 \
+			DEF:e1u=/home/stats/data/elephant01-mem.rrd:used:AVERAGE \
+			DEF:e1b=/home/stats/data/elephant01-mem.rrd:buffers:AVERAGE \
+			DEF:e1c=/home/stats/data/elephant01-mem.rrd:cache:AVERAGE \
+			DEF:e1t=/home/stats/data/elephant01-mem.rrd:total:AVERAGE \
+			CDEF:e1tu=e1u,e1b,-,e1c,- \
+			DEF:e2u=/home/stats/data/elephant02-mem.rrd:used:AVERAGE \
+			DEF:e2b=/home/stats/data/elephant02-mem.rrd:buffers:AVERAGE \
+			DEF:e2c=/home/stats/data/elephant02-mem.rrd:cache:AVERAGE \
+			CDEF:e2tu=e2u,e2b,-,e2c,- \
+			DEF:e3u=/home/stats/data/elephant03-mem.rrd:used:AVERAGE \
+			DEF:e3b=/home/stats/data/elephant03-mem.rrd:buffers:AVERAGE \
+			DEF:e3c=/home/stats/data/elephant03-mem.rrd:cache:AVERAGE \
+			CDEF:e3tu=e3u,e3b,-,e3c,- \
+			DEF:e4u=/home/stats/data/elephant04-mem.rrd:used:AVERAGE \
+			DEF:e4b=/home/stats/data/elephant04-mem.rrd:buffers:AVERAGE \
+			DEF:e4c=/home/stats/data/elephant04-mem.rrd:cache:AVERAGE \
+			CDEF:e4tu=e4u,e4b,-,e4c,- \
+			DEF:e5u=/home/stats/data/elephant05-mem.rrd:used:AVERAGE \
+			DEF:e5b=/home/stats/data/elephant05-mem.rrd:buffers:AVERAGE \
+			DEF:e5c=/home/stats/data/elephant05-mem.rrd:cache:AVERAGE \
+			CDEF:e5tu=e5u,e5b,-,e5c,- \
+			DEF:e6u=/home/stats/data/elephant06-mem.rrd:used:AVERAGE \
+			DEF:e6b=/home/stats/data/elephant06-mem.rrd:buffers:AVERAGE \
+			DEF:e6c=/home/stats/data/elephant06-mem.rrd:cache:AVERAGE \
+			CDEF:e6tu=e6u,e6b,-,e6c,- \
+			DEF:e7u=/home/stats/data/elephant07-mem.rrd:used:AVERAGE \
+			DEF:e7b=/home/stats/data/elephant07-mem.rrd:buffers:AVERAGE \
+			DEF:e7c=/home/stats/data/elephant07-mem.rrd:cache:AVERAGE \
+			CDEF:e7tu=e7u,e7b,-,e7c,- \
+			DEF:e8u=/home/stats/data/elephant08-mem.rrd:used:AVERAGE \
+			DEF:e8b=/home/stats/data/elephant08-mem.rrd:buffers:AVERAGE \
+			DEF:e8c=/home/stats/data/elephant08-mem.rrd:cache:AVERAGE \
+			CDEF:e8tu=e8u,e8b,-,e8c,- \
+			DEF:e9u=/home/stats/data/elephant09-mem.rrd:used:AVERAGE \
+			DEF:e9b=/home/stats/data/elephant09-mem.rrd:buffers:AVERAGE \
+			DEF:e9c=/home/stats/data/elephant09-mem.rrd:cache:AVERAGE \
+			CDEF:e9tu=e9u,e9b,-,e9c,- \
+			DEF:e10u=/home/stats/data/elephant10-mem.rrd:used:AVERAGE \
+			DEF:e10b=/home/stats/data/elephant10-mem.rrd:buffers:AVERAGE \
+			DEF:e10c=/home/stats/data/elephant10-mem.rrd:cache:AVERAGE \
+			CDEF:e10tu=e10u,e10b,-,e10c,- \
+			DEF:e11u=/home/stats/data/elephant11-mem.rrd:used:AVERAGE \
+			DEF:e11b=/home/stats/data/elephant11-mem.rrd:buffers:AVERAGE \
+			DEF:e11c=/home/stats/data/elephant11-mem.rrd:cache:AVERAGE \
+			CDEF:e11tu=e11u,e11b,-,e11c,- \
+			AREA:e1t#cccccc:"Total" \
+			LINE:e1tu#00007f:"e1" \
+			LINE:e2tu#0000ff:"e2" \
+			LINE:e3tu#007f00:"e3" \
+			LINE:e4tu#007f7f:"e4" \
+			LINE:e5tu#007fff:"e5" \
+			LINE:e6tu#00ff00:"e6" \
+			LINE:e7tu#00ff7f:"e7" \
+			LINE:e8tu#00ffff:"e8" \
+			LINE:e9tu#7f0000:"e9" \
+			LINE:e10tu#7f007f:"e10" \
+			LINE:e11tu#7f00ff:"e11"
+	else
+		rrdtool graph  ~/stats/$host-mem.png --imgformat PNG \
+			--title 'Memory Usage ('$host')' \
+			--vertical-label 'Gigabytes' \
+			--width 1600 --height 800 \
+			--start $start --end $end \
+			--lower-limit 0 --upper-limit 24 \
+			DEF:u=/home/stats/data/$host-mem.rrd:used:AVERAGE \
+			DEF:b=/home/stats/data/$host-mem.rrd:buffers:AVERAGE \
+			DEF:c=/home/stats/data/$host-mem.rrd:cache:AVERAGE \
+			DEF:t=/home/stats/data/$host-mem.rrd:total:AVERAGE \
+			AREA:t#cccccc:"Total" \
+			LINE:u#00007f:"Used" \
+			LINE:c#0000ff:"cache" \
+			LINE:b#007f00:"buffers"
+	fi
+

@@ -1,0 +1,10 @@
+* * * * * /home/stats/bin/rrdstats/rrdupdate-cpu
+* * * * * /home/stats/bin/rrdstats/rrdupdate-disk sda
+* * * * * /home/stats/bin/rrdstats/rrdupdate-disk sdb
+* * * * * /home/stats/bin/rrdstats/rrdupdate-loadavg
+* * * * * /home/stats/bin/rrdstats/rrdupdate-mem
+* * * * * /home/stats/bin/rrdstats/rrdupdate-net eth0
+* * * * * /home/stats/bin/rrdstats/rrdupdate-net eth1
+* * * * * /home/stats/bin/rrdstats/rrdupdate-net eth3
+
+* * * * * /home/stats/bin/rrdstats/generate-graphs
