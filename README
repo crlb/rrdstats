@@ -1,0 +1,17 @@
+This package assumes the following configuration:
+
+1. Package "rrdtool" is installed.
+2. User "stats" exists with the following paths:
+      /home/stats/bin/rrdstatsr	- contains all executables.
+	  /home/stats/data			- contains all round-robin databases.
+	  /home/stats/stats			- generated graphs are placed in this directory.
+
+Four types of executables are provided:
+
+1. "rrdcreate-..." are used to create the round-robin databases. You must modify the "rrdcreate-disk" 
+	and "rrdcreate-net" to match your hardware configuration, and you may need to issue each of these
+	commands more than once; i.e one database for each disk, each interface, etc.
+2. "rrdupdate-..." are used to gather statistics from /proc. see "crontab.sample".
+3. "rrdgraph-..." are used to generate graphs.
+4. Misceleneous commands, eg. the "eg" will generate any of the canned graphs and display the result 
+	using gthumb.
