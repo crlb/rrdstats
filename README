@@ -2,7 +2,7 @@ This package assumes the following configuration:
 
 1. Packages "rrdtool" and "sysstat" are installed.
 2. User "stats" exists with the following paths:
-      /home/stats/bin/rrdstatsr	- contains all executables.
+      /home/stats/bin/rrdstats	- contains all executables.
 	  /home/stats/data			- contains all round-robin databases.
 	  /home/stats/stats			- generated graphs are placed in this directory.
 
