@@ -1,0 +1,16 @@
+#!/usr/bin/perl
+# Extract data using "rrdprint" from rrd and create csv for graphing with oocalc. CSV is written to STDOUT.
+	$start = shift();
+	$stop = shift();
+
+	if ($start>0 | $start eq '') {
+		$start = -86400;
+	}
+
+	if ($stop < $start | $stop eq '') {
+		$stop = 0;
+	}
+
+	$x = `./rrdprint $start $stop | /bin/awk '!/0x0/' | /bin/awk 'BEGIN{RS=\";\"; FS=\"\\n\"} {print     \$1 \",\" \$2 \",\" \$3 \",\" \$4 \",\" \$5 \",\" \$6 \",\" \$7 \",\" \$8}'`;
+			chop($x);
+	printf("%s,%s,%s\n", $start, $stop, $x);

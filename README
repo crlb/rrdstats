@@ -15,3 +15,7 @@ Four types of executables are provided:
 3. "rrdgraph-..." are used to generate graphs.
 4. Misceleneous commands, eg. the "eg" will generate any of the canned graphs and display the result 
 	using gthumb.
+
+The "rrd2csv" and "rrdprint" files provide an example of how to extract data from round-robin databases 
+into a CSV file. The "rrd2csv-sample-graph.pdf" is an example of a graph created woth oocalc using this
+method.
